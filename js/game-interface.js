@@ -41,32 +41,30 @@ $(document).ready(function() {
     updateGameDisplay(currentGameObject);
     $('#game-display').show();
   });
+
   $('form#guess-form').submit(function(event) {
     event.preventDefault();
     var guess = $('#guess').val().slice(0, 1);
+    $('#guess').val('');
     makeGuess(currentGameObject, guess);
   });
 });
 
 function updateGameDisplay(game) {
-  var letters = game.currentWord.length;
-  var blanks = '';
-  for (var i = 0; i < letters; i++) {
-    blanks += '_ ';
-  }
+  var blanks = game.wordArray.join(' ');
   $('p#blanks').text(blanks);
 
   var alphabetDisplay = '';
   for (var i = 0; i < alphabet.length; i++) {
     var letter = alphabet[i];
-    alphabetDisplay += (game.guessedLetters.indexOf(letter) == -1 ?
-      letter : '_') + ' ';
+    alphabetDisplay += (game.guessedLetters.indexOf(letter) == -1 ? letter : '_') + ' ';
   }
   $('p#letters-guessed').text(alphabetDisplay);
+
+  $('#guess-countdown').text(game.guessesRemaining);
 }
 
 function makeGuess(game, letter) {
-  console.log('makeGuess()');
   if (game.makeGuess(letter))
     updateGameDisplay(game);
   else {

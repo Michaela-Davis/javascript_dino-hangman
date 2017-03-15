@@ -1,3 +1,7 @@
 #game-display {
   display: none;
 }
+
+p#letters-guessed {
+  text-transform: uppercase;
+}
