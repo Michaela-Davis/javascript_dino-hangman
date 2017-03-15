@@ -65,9 +65,22 @@ function updateGameDisplay(game) {
 }
 
 function makeGuess(game, letter) {
-  if (game.makeGuess(letter))
+  if (game.makeGuess(letter)) {
     updateGameDisplay(game);
+    if (checkForEndGame(game) === -1)
+      alert('You lose :(');
+    if (checkForEndGame(game) === 1)
+      alert('You win :D');
+  }
   else {
     alert('You have already guessed that letter!');
   }
+}
+
+function checkForEndGame(game) {
+  if (game.guessesRemaining === 0)
+    return -1; //lose
+  if (game.wordArray.join('') == game.currentWord)
+    return 1; //win
+  return 0; //keep playing
 }

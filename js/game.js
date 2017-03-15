@@ -7,11 +7,11 @@ function Game() {
 
 Game.prototype.setupWord = function() {
   this.currentWord = testWord.toLowerCase();
-  var wordArray1 = [];
+  var wordArray = [];
   for (var i = 0; i < this.currentWord.length; i++) {
-    wordArray1.push('_');
+    wordArray.push('_');
   }
-  this.wordArray = wordArray1;
+  this.wordArray = wordArray;
 };
 
 Game.prototype.makeGuess = function(letter) {
