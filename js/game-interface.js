@@ -50,9 +50,18 @@ function updateGameDisplay(game) {
   var alphabetDisplay = '';
   for (var i = 0; i < alphabet.length; i++) {
     var letter = alphabet[i];
-    alphabetDisplay += (game.guessedLetters.indexOf(letter) == -1 ? letter : '_') + ' ';
+    alphabetDisplay +=
+    (
+      game.guessedLetters.indexOf(letter) == -1
+      ? "<span class='letter' id='" + letter + "'>" + letter + "</span>"
+      : '_'
+    ) + ' ';
   }
-  $('p#letters-guessed').text(alphabetDisplay);
+  $('p#letters-guessed').html(alphabetDisplay);
+  $('.letter').click(function() {
+    var letter = $(this).attr('id');
+    makeGuess(game, letter);
+  });
 
   $('#guess-countdown').text(game.guessesRemaining);
   $('img#countdown-image').attr('src', 'img/stegosaurus ' + game.guessesRemaining +'.png');

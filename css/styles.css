@@ -6,6 +6,10 @@ p#letters-guessed {
   text-transform: uppercase;
 }
 
+.letter {
+  cursor: pointer;
+}
+
 #img-well,
 #countdown-image {
   max-height: 150px;
