@@ -1,13 +1,13 @@
-# _Dino Hangman_
+# _Extinct Man_
 
-#### _Dino Hangman, 3.15.17_
+#### _Extinct Man, 3.15.17_
 
 #### By _**Michaela Davis**_ & _**Patrick McGreevy**_
 
 
 ## Description
 
-A website where a user can play [Hangman](https://en.wikipedia.org/wiki/Hangman_(game)) with dinosaur-related words from a Lorem ipsum generator.
+A website where a user can play [Hangman](https://en.wikipedia.org/wiki/Hangman_(game)) with dinosaur-related words from a [Lorem ipsum generator](http://dinoipsum.herokuapp.com/#res).
 
 ## Setup
 1. Run `$ npm install`.
