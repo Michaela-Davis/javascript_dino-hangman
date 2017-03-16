@@ -12,22 +12,6 @@ function Game(word) {
   this.wordArray = wordArray;
 }
 
-// Game.prototype.setupWord = function() {
-//   var wordArray = [];
-//
-//   $.get('http://dinoipsum.herokuapp.com/api/?format=json&paragraphs=1&words=1')
-//     .then(function(json) {
-//       this.currentWord = json[0][0].toLowerCase();
-//
-//       for (var i = 0; i < this.currentWord.length; i++) {
-//         wordArray.push('_');
-//       }
-//       this.wordArray = wordArray;
-//       console.log('Game -setupWord then');
-//     });
-//     console.log('Game -setupWord end');
-// };
-
 Game.prototype.makeGuess = function(letter) {
   letter = letter.toLowerCase();
   if (this.guessedLetters.indexOf(letter) != -1)

@@ -33,20 +33,6 @@ var alphabet = [
 
 var currentGameObject;
 
-$(document).ready(function() {
-  $('form#new-game').submit(function(event) {
-    event.preventDefault();
-    newGame();
-  });
-
-  $('form#guess-form').submit(function(event) {
-    event.preventDefault();
-    var guess = $('#guess').val().slice(0, 1);
-    $('#guess').val('');
-    makeGuess(currentGameObject, guess);
-  });
-});
-
 function newGame() {
   $.get('http://dinoipsum.herokuapp.com/api/?format=json&paragraphs=1&words=1')
     .then(function(json) {
@@ -69,23 +55,28 @@ function updateGameDisplay(game) {
   $('p#letters-guessed').text(alphabetDisplay);
 
   $('#guess-countdown').text(game.guessesRemaining);
+  $('img#countdown-image').attr('src', 'img/stegosaurus ' + game.guessesRemaining +'.png');
+  $('p#alert').text('');
 }
 
 function makeGuess(game, letter) {
   if (game.makeGuess(letter)) {
     updateGameDisplay(game);
-    if (checkForEndGame(game) === -1) {
-      $('form#guess-form').hide();
-      showAnswer(game);
-      alert('You lose :(');
+    switch (checkForEndGame(game)) {
+      case -1:
+        $('form#guess-form').hide();
+        showAnswer(game);
+        $('p#alert').text('You lose :(');
+        break;
+      case 1:
+        $('form#guess-form').hide();
+        $('p#alert').text('You win :D');
+        break;
+      default:
+        break;
     }
-    if (checkForEndGame(game) === 1) {
-      $('form#guess-form').hide();
-      alert('You win :D');
-    }
-  }
-  else {
-    alert('You have already guessed that letter!');
+  } else {
+    $('p#alert').text('You have already guessed that letter!');
   }
 }
 
@@ -101,3 +92,18 @@ function showAnswer(game) {
   var answer = game.currentWord.split('').join(' ');
   $('p#blanks').text(answer);
 }
+
+
+$(document).ready(function() {
+  $('form#new-game').submit(function(event) {
+    event.preventDefault();
+    newGame();
+  });
+
+  $('form#guess-form').submit(function(event) {
+    event.preventDefault();
+    var guess = $('#guess').val().slice(0, 1);
+    $('#guess').val('');
+    makeGuess(currentGameObject, guess);
+  });
+});

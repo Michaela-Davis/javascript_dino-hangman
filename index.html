@@ -10,21 +10,26 @@
 </head>
 <body>
   <div class="container">
-    <h1>Dino Hangman</h1>
+    <h1>Extinct Man</h1>
+
 
     <div id='game-display'>
+      <p id='alert'></p>
+      <div id='img-well'>
+        <img id='countdown-image' src='img/stegosaurus 10.png' alt='Stegosaurus'>
+      </div>
       <p id='blanks'></p>
 
       <form id='guess-form'>
         <input type="text" id='guess'>
-        <button class="btn" type="submit" name="button">Submit Guess!</button>
+        <button class="btn btn-success" type="submit" name="button">Submit Guess!</button>
       </form>
       <p id='letters-guessed'></p>
       <p><span id='guess-countdown'></span> guesses remaining</p>
 
     </div>
     <form id='new-game'>
-      <button class="btn" type="submit" name="button" id='new-game-button'>New Game!</button>
+      <button class="btn btn-warning" type="submit" name="button" id='new-game-button'>New Game!</button>
     </form>
   </div>
 </body>

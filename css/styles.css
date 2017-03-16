@@ -5,3 +5,9 @@
 p#letters-guessed {
   text-transform: uppercase;
 }
+
+#img-well,
+#countdown-image {
+  max-height: 150px;
+  margin: auto;
+}
