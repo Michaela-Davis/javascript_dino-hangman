@@ -58,14 +58,18 @@ function updateGameDisplay(game) {
     ) + ' ';
   }
   $('p#letters-guessed').html(alphabetDisplay);
-  $('.letter').click(function() {
-    var letter = $(this).attr('id');
-    makeGuess(game, letter);
-  });
+  if (! checkForEndGame(game)) {
+    $('.letter').click(function() {
+      var letter = $(this).attr('id');
+      makeGuess(game, letter);
+    });
+  } else {
+    $('.letter').removeClass('letter');
+  }
 
   $('#guess-countdown').text(game.guessesRemaining);
   $('img#countdown-image').attr('src', 'img/stegosaurus ' + game.guessesRemaining +'.png');
-  $('p#alert').text('');
+  $('p#alert').text('Press or click a letter to make a guess.');
 }
 
 function makeGuess(game, letter) {
@@ -109,10 +113,14 @@ $(document).ready(function() {
     newGame();
   });
 
-  $('form#guess-form').submit(function(event) {
-    event.preventDefault();
-    var guess = $('#guess').val().slice(0, 1);
-    $('#guess').val('');
-    makeGuess(currentGameObject, guess);
+  $('html').keypress(function(event) {
+    var key = event.which;
+    var index = null;
+    if (key >= 65 && key <= 90)
+      index = key - 65;
+    else if (key >= 97 && key <= 122)
+      index = key - 97;
+    if (currentGameObject && ! checkForEndGame(currentGameObject) && index !== null)
+      makeGuess(currentGameObject, alphabet[index]);
   });
 });
